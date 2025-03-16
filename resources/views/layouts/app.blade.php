@@ -15,12 +15,13 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none font-sans">
+<body class="bg-gray-100 antialiased leading-none font-sans m-0">
     <div id="app">
-        <header class="bg-gray-800 py-6">
-            <div class="container mx-auto flex justify-between items-center px-6">
+        <!-- Header -->
+        <header class="bg-gray-800 shadow-md">
+            <div class="container mx-auto flex justify-between items-center px-6 py-4">
                 <div>
-                    <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
+                    <a href="{{ url('/') }}" class="text-lg font-bold text-gray-100 no-underline">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -33,12 +34,12 @@
                             <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
-                        <span>{{ Auth::user()->name }}</span>
-
+                        <span class="text-gray-100">{{ Auth::user()->name }}</span>
                         <a href="{{ route('logout') }}"
-                           class="no-underline hover:underline"
-                           onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                           class="no-underline hover:underline text-gray-100"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                           {{ __('Logout') }}
+                        </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                             {{ csrf_field() }}
                         </form>
@@ -46,14 +47,15 @@
                 </nav>
             </div>
         </header>
-
-        <div>
+        
+        <!-- Main Content -->
+        <!-- Notice we've removed the default py-10 so that pages like the homepage can set their own spacing -->
+        <main>
             @yield('content')
-        </div>
-
-        <div>
-            @include('layouts.footer')
-        </div>
+        </main>
+        
+        <!-- Footer -->
+        @include('layouts.footer')
     </div>
 </body>
 </html>

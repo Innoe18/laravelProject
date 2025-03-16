@@ -41,7 +41,9 @@
         </div>
     </div>
 
-    <div class="text-center p-15 bg-black text-white">
+    <div class="text-center p-15 padding-left: 0.375rem;
+
+padding-right: 0.375rem; bg-pink-400 text-white">
         <h2 class="text-2xl pb-5 text-l"> 
            What to look out for
         </h2>
@@ -74,7 +76,7 @@
     </div>
 
     <div class="sm:grid grid-cols-2 w-4/5 m-auto">
-        <div class="flex bg-yellow-700 text-gray-100 pt-10">
+        <div class="flex bg-purple-400 text-gray-100 pt-10">
             <div class="m-auto pt-4 pb-16 sm:m-auto w-4/5 block">
                 <span class="uppercase text-xs">
                     Lia Block
