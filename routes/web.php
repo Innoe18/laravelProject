@@ -30,3 +30,6 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Auth::routes();
 Route::resource('/memes', MemeController::class);
 
+
+
+Route::get('/search', [PostsController::class, 'search'])->name('search');

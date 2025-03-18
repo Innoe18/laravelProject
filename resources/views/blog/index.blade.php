@@ -6,7 +6,23 @@
     <div class="text-center mb-10">
         <h1 class="text-5xl font-bold text-gray-800">Blog Posts</h1>
     </div>
-
+    <form action="{{ route('search') }}" method="GET" class="mb-6 flex justify-center">
+        <input 
+            type="text" 
+            name="query" 
+            placeholder="Search blog posts..." 
+            required
+            class="w-1/2 p-3 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+        <button 
+            type="submit" 
+            class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-r-full transition duration-300"
+        >
+            Search
+        </button>
+    </form>
+    
+    
     <!-- Session Message -->
     @if (session()->has('message'))
         <div class="mb-6">
