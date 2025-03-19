@@ -17,7 +17,11 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    public function likes()
+    {
+        return $this->morphMany(\App\Models\Like::class, 'likeable');
+    }
+    
     public function sluggable(): array
     {
         return [

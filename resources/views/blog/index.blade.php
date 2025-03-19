@@ -6,6 +6,7 @@
     <div class="text-center mb-10">
         <h1 class="text-5xl font-bold text-gray-800">Blog Posts</h1>
     </div>
+    <!-- Search Form -->
     <form action="{{ route('search') }}" method="GET" class="mb-6 flex justify-center">
         <input 
             type="text" 
@@ -21,8 +22,7 @@
             Search
         </button>
     </form>
-    
-    
+
     <!-- Session Message -->
     @if (session()->has('message'))
         <div class="mb-6">
@@ -60,21 +60,40 @@
                         <a href="/blog/{{ $post->slug }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">
                             Keep Reading
                         </a>
-                        @if (isset(Auth::user()->id) && Auth::user()->id == $post->user_id)
-                            <div class="flex space-x-2">
-                                <a href="/blog/{{ $post->slug }}/edit" class="text-gray-600 hover:text-gray-900 text-sm font-medium border-b border-transparent hover:border-gray-900">
-                                    Edit
-                                </a>
-                                <form action="/blog/{{ $post->slug }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 text-sm font-medium">
-                                        Delete
-                                    </button>
-                                </form>
-                            </div>
-                        @endif
+                        @auth
+                            @php
+                                // Check if the current user has already liked this post.
+                                $userLiked = $post->likes->contains('user_id', Auth::id());
+                            @endphp
+                            <form action="{{ route('like.store') }}" method="POST" class="inline">
+                                @csrf
+                                <input type="hidden" name="likeable_id" value="{{ $post->id }}">
+                                <input type="hidden" name="likeable_type" value="{{ get_class($post) }}">
+                                <button type="submit" class="text-xl transition duration-300 flex items-center">
+                                    @if ($userLiked)
+                                        <i class="fas fa-heart text-red-500"></i>
+                                    @else
+                                        <i class="far fa-heart text-gray-500"></i>
+                                    @endif
+                                    <span class="ml-1">({{ $post->likes->count() }})</span>
+                                </button>
+                            </form>
+                        @endauth
                     </div>
+                    @if (isset(Auth::user()->id) && Auth::user()->id == $post->user_id)
+                        <div class="flex space-x-2 mt-2">
+                            <a href="/blog/{{ $post->slug }}/edit" class="text-gray-600 hover:text-gray-900 text-sm font-medium border-b border-transparent hover:border-gray-900">
+                                Edit
+                            </a>
+                            <form action="/blog/{{ $post->slug }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="text-red-500 hover:text-red-700 text-sm font-medium">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
         @endforeach

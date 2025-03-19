@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\MemeController;
-
+use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +33,4 @@ Route::resource('/memes', MemeController::class);
 
 
 Route::get('/search', [PostsController::class, 'search'])->name('search');
+Route::post('/like', [LikeController::class, 'store'])->name('like.store');

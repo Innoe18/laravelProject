@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Meme extends Model
+
+
+class Like extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'image_path',
-        'description',
         'user_id',
     ];
-    public function likes()
-{
-    return $this->morphMany(\App\Models\Like::class, 'likeable');
 }
 
-}
