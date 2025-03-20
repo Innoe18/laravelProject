@@ -6,6 +6,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\MemeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\HelmetController;
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +39,5 @@ Route::get('/search', [PostsController::class, 'search'])->name('search');
 Route::post('/like', [LikeController::class, 'store'])->name('like.store');
 Route::resource('/helmets', HelmetController::class);
 Route::post('/helmets/{id}/vote', [HelmetController::class, 'vote'])->name('helmets.vote');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
