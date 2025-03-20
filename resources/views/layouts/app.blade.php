@@ -13,31 +13,36 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <link rel="stylesheet" href="css/style.css">
+    @stack('styles')
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 antialiased leading-none font-sans m-0">
+<body class="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 antialiased leading-none font-sans m-0">
     <div id="app">
         <!-- Header -->
-        <header class="bg-gray-800 shadow-md">
+        <header class="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 shadow-md">
             <div class="container mx-auto flex justify-between items-center px-6 py-4">
                 <div>
-                    <a href="{{ url('/') }}" class="text-lg font-bold text-gray-100 no-underline">
+                    <a href="{{ url('/') }}" class="text-lg font-bold text-gray-800 no-underline">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
-                <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
+                <nav class="space-x-4 text-gray-800 text-sm sm:text-base">
                     <a class="no-underline hover:underline" href="/">Home</a>
                     <a class="no-underline hover:underline" href="/blog">Blog</a>
+                    <a class="no-underline hover:underline" href="/helmets">Helmet of the Week</a>
+
+                    <a class="no-underline hover:underline" href="/about">About Us</a>
                     @guest
                         <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
                         @if (Route::has('register'))
                             <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
-                        <span class="text-gray-100">{{ Auth::user()->name }}</span>
+                        <span class="text-gray-800">{{ Auth::user()->name }}</span>
                         <a href="{{ route('logout') }}"
-                           class="no-underline hover:underline text-gray-100"
+                           class="no-underline hover:underline text-gray-800"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                            {{ __('Logout') }}
                         </a>
@@ -50,7 +55,6 @@
         </header>
         
         <!-- Main Content -->
-        <!-- Notice we've removed the default py-10 so that pages like the homepage can set their own spacing -->
         <main>
             @yield('content')
         </main>

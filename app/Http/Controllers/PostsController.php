@@ -19,10 +19,10 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('blog.index')
-            ->with('posts', Post::orderBy('updated_at', 'DESC')->get());
-    }
+{
+    $posts = Post::all();
+    return view('blog.index', compact('posts'));
+}
     public function search(Request $request)
     {
         $query = $request->input('query');

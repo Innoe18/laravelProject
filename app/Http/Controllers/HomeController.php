@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Helmet;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // Fetch top helmet (most votes)
+        $topHelmet = Helmet::orderBy('votes', 'desc')->first();
+
+        // Fetch top blog post (most likes) - assumes you have a 'likes' relationship on Post
+        $topPost = Post::withCount('likes')->orderBy('likes_count', 'desc')->first();
+
+        // If your view file is resources/views/index.blade.php, pass the variables:
+        return view('index', compact('topHelmet', 'topPost'));
     }
 }

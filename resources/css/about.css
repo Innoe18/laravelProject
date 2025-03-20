@@ -1,0 +1,49 @@
+body.about-page {
+    background: url('https://img-ig-cdn.walls.io/01JPQ112T6TM3RZ95J82SKZYYV+instagram+feed?w=&h=&q=85&nu=1&webp=1') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* Make text readable */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.about-container h1, .about-container p {
+    text-align: center;
+}
+
+.about-container h1 {
+    font-size: 2.5rem;
+}
+
+.about-container p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Specific styling for navbar */
+.navbar {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar a {
+    color: #FFD700;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 0 15px;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #FFD700;
+}

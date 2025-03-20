@@ -5,6 +5,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\MemeController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\HelmetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +31,10 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Auth::routes();
 Route::resource('/memes', MemeController::class);
 
-
+Route::get('/', [\App\Http\Controllers\PagesController::class, 'home'])->name('home');
+Route::get('/about', [\App\Http\Controllers\PagesController::class, 'about'])->name('about');
 
 Route::get('/search', [PostsController::class, 'search'])->name('search');
 Route::post('/like', [LikeController::class, 'store'])->name('like.store');
+Route::resource('/helmets', HelmetController::class);
+Route::post('/helmets/{id}/vote', [HelmetController::class, 'vote'])->name('helmets.vote');
