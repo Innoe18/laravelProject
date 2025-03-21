@@ -18,13 +18,31 @@ class HelmetController extends Controller
         return view('helmets.index', compact('helmets'));
     }
     public function vote($id)
-    {
-        // Ensure the user is authenticated before voting (or add middleware)
-        $helmet = Helmet::findOrFail($id);
-        // Increment the votes count (add additional logic for one vote per user if needed)
-        $helmet->increment('votes');
-        return redirect()->back()->with('message', 'Thanks for voting!');
+{
+    // Get the authenticated user
+    $user = auth()->user();
+
+    // Count how many helmet votes this user has cast
+    $votesCount = \App\Models\HelmetVote::where('user_id', $user->id)->count();
+
+    // Check if the user has reached the limit of 2 votes
+    if ($votesCount >= 2) {
+        return redirect()->back()->with('message', 'You have reached your voting limit.');
     }
+
+    // Create a new vote record for this helmet
+    \App\Models\HelmetVote::create([
+        'user_id' => $user->id,
+        'helmet_id' => $id,
+    ]);
+
+    // Increment the vote count on the helmet
+    $helmet = Helmet::findOrFail($id);
+    $helmet->increment('votes');
+
+    return redirect()->back()->with('message', 'Thanks for voting!');
+}
+
     
     /**
      * Show the form for creating a new resource.

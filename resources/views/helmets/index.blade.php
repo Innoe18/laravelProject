@@ -3,7 +3,14 @@
 @section('content')
 <div class="container mx-auto px-4 py-10">
     <div class="bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 p-6 rounded-lg shadow-lg my-10">
-        <h2 class="text-3xl font-bold text-pink-500 mb-6 text-center">Helmet of the Week</h2>
+        <h2 class="text-3xl font-bold text-pink-500 mb-4 text-center">Helmet of the Week</h2>
+        
+        <!-- Disclaimer -->
+        <p class="text-center text-sm text-gray-600 mb-6">
+            <i class="fas fa-info-circle text-pink-400 mr-2"></i>
+            Note: Each user can vote only twice in total.
+        </p>
+        
         @if($helmets->isEmpty())
             <p class="text-center text-gray-600">No helmets available at the moment. Check back soon!</p>
         @else

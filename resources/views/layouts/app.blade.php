@@ -12,7 +12,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <link rel="stylesheet" href="css/style.css">
     @stack('styles')
     <!-- Styles -->
@@ -32,10 +31,8 @@
                     <a class="no-underline hover:underline" href="/">Home</a>
                     <a class="no-underline hover:underline" href="/blog">Blog</a>
                     <a class="no-underline hover:underline" href="/helmets">Helmet of the Week</a>
-
                     <a class="no-underline hover:underline" href="/about">About Us</a>
                     <a class="no-underline hover:underline" href="/contact">Contact Us</a>
-
                     @guest
                         <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
                         @if (Route::has('register'))
@@ -56,6 +53,15 @@
             </div>
         </header>
         
+        <!-- Session Message -->
+        @if (session('message'))
+            <div class="container mx-auto px-4 py-4">
+                <p class="text-center text-white bg-red-500 rounded-full py-3">
+                    {{ session('message') }}
+                </p>
+            </div>
+        @endif
+
         <!-- Main Content -->
         <main>
             @yield('content')
