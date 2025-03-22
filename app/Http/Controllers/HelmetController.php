@@ -18,30 +18,34 @@ class HelmetController extends Controller
         return view('helmets.index', compact('helmets'));
     }
     public function vote($id)
-{
-    // Get the authenticated user
-    $user = auth()->user();
-
-    // Count how many helmet votes this user has cast
-    $votesCount = \App\Models\HelmetVote::where('user_id', $user->id)->count();
-
-    // Check if the user has reached the limit of 2 votes
-    if ($votesCount >= 2) {
-        return redirect()->back()->with('message', 'You have reached your voting limit.');
+    {
+        // Check if the user is authenticated
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->back()->with('message', 'Please log in or register to vote.');
+        }
+    
+        // Count how many helmet votes this user has cast
+        $votesCount = \App\Models\HelmetVote::where('user_id', $user->id)->count();
+    
+        // Check if the user has reached the limit of 2 votes
+        if ($votesCount >= 2) {
+            return redirect()->back()->with('message', 'You have reached your voting limit.');
+        }
+    
+        // Create a new vote record for this helmet
+        \App\Models\HelmetVote::create([
+            'user_id'   => $user->id,
+            'helmet_id' => $id,
+        ]);
+    
+        // Increment the vote count on the helmet
+        $helmet = \App\Models\Helmet::findOrFail($id);
+        $helmet->increment('votes');
+    
+        return redirect()->back()->with('message', 'Thanks for voting!');
     }
-
-    // Create a new vote record for this helmet
-    \App\Models\HelmetVote::create([
-        'user_id' => $user->id,
-        'helmet_id' => $id,
-    ]);
-
-    // Increment the vote count on the helmet
-    $helmet = Helmet::findOrFail($id);
-    $helmet->increment('votes');
-
-    return redirect()->back()->with('message', 'Thanks for voting!');
-}
+    
 
     
     /**
