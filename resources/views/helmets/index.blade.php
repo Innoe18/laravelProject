@@ -22,7 +22,9 @@
                                 Winner!
                             </div>
                         @endif
-                        <img src="{{ asset('images/' . $helmet->image_path) }}" alt="{{ $helmet->title }}" class="w-full h-48 object-cover object-center rounded">
+                        <div class="w-full h-48 flex items-center justify-center overflow-hidden rounded">
+                            <img src="{{ asset('images/' . $helmet->image_path) }}" alt="{{ $helmet->title }}" class="w-full max-h-48 object-contain object-center">
+                        </div>
                         <h3 class="mt-4 text-xl font-bold text-purple-600">{{ $helmet->title }}</h3>
                         <p class="text-gray-600 text-sm mt-2">{{ $helmet->inspiration }}</p>
                         <div class="mt-4 text-center">
