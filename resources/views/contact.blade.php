@@ -41,9 +41,9 @@
             <p class="font-bold">contact@f1academyblog.com</p>
             <p class="mt-2">Follow us on social media for the latest updates!</p>
             <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-twitter fa-2x"></i></a>
-                <a href="#" class="text-pink-500 hover:text-pink-700"><i class="fab fa-instagram fa-2x"></i></a>
-                <a href="#" class="text-purple-500 hover:text-purple-700"><i class="fab fa-facebook fa-2x"></i></a>
+                <a href="https://x.com/f1academy" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://www.instagram.com/p/DHYOO_9sz-N/?img_index=1" target="_blank" rel="noopener noreferrer" class="text-pink-500 hover:text-pink-700"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://www.facebook.com/@f1academyoftechnicalanalysissb/" target="_blank" rel="noopener noreferrer" class="text-purple-500 hover:text-purple-700"><i class="fab fa-facebook fa-2x"></i></a>
             </div>
         </div>
     </div>
