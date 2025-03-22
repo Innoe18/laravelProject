@@ -3,23 +3,19 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 pb-8 border-b border-gray-400">
             <!-- Pages -->
             <div>
-                <h3 class="text-lg font-bold text-gray-800">Pages</h3>
+                <h3 class="text-lg font-bold text-gray-800">The Fast Lane Hangout</h3>
                 <ul class="mt-4 text-gray-700 space-y-2">
                     <li>
                         <a href="/" class="hover:text-gray-900 transition-colors">Home</a>
                     </li>
                     <li>
-                        <a href="/blog" class="hover:text-gray-900 transition-colors">Blog</a>
+                        <a href="/blog" class="hover:text-gray-900 transition-colors">Victory Lane Lounge</a>
                     </li>
+                   
                     <li>
-                        <a href="/memes" class="hover:text-gray-900 transition-colors">Memes</a>
+                        <a href="/helmets" class="hover:text-gray-900 transition-colors">Speed & Fun Zone</a>
                     </li>
-                    <li>
-                        <a href="/login" class="hover:text-gray-900 transition-colors">Login</a>
-                    </li>
-                    <li>
-                        <a href="/register" class="hover:text-gray-900 transition-colors">Register</a>
-                    </li>
+                    
                 </ul>
             </div>
 
@@ -28,16 +24,15 @@
                 <h3 class="text-lg font-bold text-gray-800">Find Us</h3>
                 <ul class="mt-4 text-gray-700 space-y-2">
                     <li>
-                        <a href="/" class="hover:text-gray-900 transition-colors">What we do</a>
+                        <a href="/about" class="hover:text-gray-900 transition-colors">What we do</a>
                     </li>
+                   
                     <li>
-                        <a href="/" class="hover:text-gray-900 transition-colors">Address</a>
+                        <a href="https://www.instagram.com/p/DHYOO_9sz-N/?img_index=1" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 transition-colors">Instagram</a>
                     </li>
+                    
                     <li>
-                        <a href="/" class="hover:text-gray-900 transition-colors">Phone</a>
-                    </li>
-                    <li>
-                        <a href="/" class="hover:text-gray-900 transition-colors">Contact</a>
+                        <a href="/contact" class="hover:text-gray-900 transition-colors">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -47,16 +42,14 @@
                 <h3 class="text-lg font-bold text-gray-800">Latest Posts</h3>
                 <ul class="mt-4 text-gray-700 space-y-2">
                     <li>
-                        <a href="/" class="hover:text-gray-900 transition-colors">Breaking Barriers</a>
+                        <a href="/blog/chineese-grand-prix" class="hover:text-gray-900 transition-colors">Chineese Grand Prix</a>
+                    </li>
+                   
+                    <li>
+                        <a href="/blog/chloe-chong-returns-to-f1-academy-with-charlotte-tilbury-1" class="hover:text-gray-900 transition-colors">Chloe's Return</a>
                     </li>
                     <li>
-                        <a href="/" class="hover:text-gray-900 transition-colors">On the Fast Track</a>
-                    </li>
-                    <li>
-                        <a href="/" class="hover:text-gray-900 transition-colors">Fan Fuel</a>
-                    </li>
-                    <li>
-                        <a href="/" class="hover:text-gray-900 transition-colors">Future Fast</a>
+                        <a href="/blog/formular-1-academy" class="hover:text-gray-900 transition-colors">What is Formular 1 Academy</a>
                     </li>
                 </ul>
             </div>
