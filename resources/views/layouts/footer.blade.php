@@ -55,7 +55,7 @@
             </div>
         </div>
         <p class="mt-8 text-center text-xs text-gray-600">
-            &copy; 2017-2021 Code With Innoe. All Rights Reserved.
+            &copy; 2017-2025 Code With Innoe. All Rights Reserved.
         </p>
     </div>
 </footer>
