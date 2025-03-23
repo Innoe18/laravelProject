@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Helmet;
 
+use App\Models\Helmet;
+use App\Models\HelmetVote; // Make sure this model exists and is imported.
 use Illuminate\Http\Request;
 
 class HelmetController extends Controller
@@ -14,40 +15,49 @@ class HelmetController extends Controller
      */
     public function index()
     {
-        $helmets = \App\Models\Helmet::orderBy('votes', 'desc')->get();
+        $helmets = Helmet::orderBy('votes', 'desc')->get();
         return view('helmets.index', compact('helmets'));
     }
+
+    /**
+     * Process a vote for a helmet.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function vote($id)
     {
-        // Check if the user is authenticated
         $user = auth()->user();
         if (!$user) {
             return redirect()->back()->with('message', 'Please log in or register to vote.');
         }
-    
+        
+        // Block admin voting based on email check
+        if ($user->email === 'admin@admin.com') {
+            return redirect()->back()->with('message', 'Admin users cannot vote.');
+        }
+        
         // Count how many helmet votes this user has cast
-        $votesCount = \App\Models\HelmetVote::where('user_id', $user->id)->count();
-    
+        $votesCount = HelmetVote::where('user_id', $user->id)->count();
+
         // Check if the user has reached the limit of 2 votes
         if ($votesCount >= 2) {
             return redirect()->back()->with('message', 'You have reached your voting limit.');
         }
-    
+
         // Create a new vote record for this helmet
-        \App\Models\HelmetVote::create([
+        HelmetVote::create([
             'user_id'   => $user->id,
             'helmet_id' => $id,
         ]);
-    
+
         // Increment the vote count on the helmet
-        $helmet = \App\Models\Helmet::findOrFail($id);
+        $helmet = Helmet::findOrFail($id);
         $helmet->increment('votes');
-    
+
         return redirect()->back()->with('message', 'Thanks for voting!');
     }
-    
 
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -55,7 +65,7 @@ class HelmetController extends Controller
      */
     public function create()
     {
-        //
+        return view('helmets.create');
     }
 
     /**
@@ -66,7 +76,24 @@ class HelmetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'       => 'required|string|max:255',
+            'inspiration' => 'required|string',
+            'image'       => 'required|image|mimes:jpg,png,jpeg|max:5048',
+        ]);
+
+        $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $newImageName);
+
+        Helmet::create([
+            'title'       => $request->input('title'),
+            'inspiration' => $request->input('inspiration'),
+            'image_path'  => $newImageName,
+            'votes'       => 0,
+            'is_winner'   => false,
+        ]);
+
+        return redirect()->route('helmets.index')->with('message', 'New helmet added!');
     }
 
     /**
@@ -77,7 +104,7 @@ class HelmetController extends Controller
      */
     public function show($id)
     {
-        //
+        // Implement as needed
     }
 
     /**
@@ -88,7 +115,7 @@ class HelmetController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Implement as needed
     }
 
     /**
@@ -100,7 +127,7 @@ class HelmetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Implement as needed
     }
 
     /**
@@ -111,6 +138,6 @@ class HelmetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Implement as needed
     }
 }
