@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Helmet;
-use App\Models\HelmetVote; // Make sure this model exists and is imported.
+use App\Models\HelmetVote; // Ensure this model exists
 use Illuminate\Http\Request;
 
 class HelmetController extends Controller
@@ -38,7 +38,7 @@ class HelmetController extends Controller
         }
         
         // Count how many helmet votes this user has cast
-        $votesCount = HelmetVote::where('user_id', $user->id)->count();
+        $votesCount = \App\Models\HelmetVote::where('user_id', $user->id)->count();
 
         // Check if the user has reached the limit of 2 votes
         if ($votesCount >= 2) {
@@ -115,7 +115,8 @@ class HelmetController extends Controller
      */
     public function edit($id)
     {
-        // Implement as needed
+        $helmet = Helmet::findOrFail($id);
+        return view('helmets.edit', compact('helmet'));
     }
 
     /**
@@ -127,7 +128,32 @@ class HelmetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Implement as needed
+        // Only allow admin to update
+        $user = auth()->user();
+        if (!$user || $user->email !== 'admin@admin.com') {
+            return redirect()->back()->with('message', 'You do not have permission to update this helmet.');
+        }
+
+        $helmet = Helmet::findOrFail($id);
+
+        $request->validate([
+            'title'       => 'required|string|max:255',
+            'inspiration' => 'required|string',
+            'image'       => 'nullable|image|mimes:jpg,png,jpeg|max:5048',
+        ]);
+
+        $helmet->title = $request->input('title');
+        $helmet->inspiration = $request->input('inspiration');
+
+        if ($request->hasFile('image')) {
+            $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $newImageName);
+            $helmet->image_path = $newImageName;
+        }
+
+        $helmet->save();
+
+        return redirect()->route('helmets.index')->with('message', 'Helmet updated successfully!');
     }
 
     /**
@@ -137,16 +163,14 @@ class HelmetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-{
-    // Ensure the authenticated user is admin
-    $user = auth()->user();
-    if ($user && $user->email === 'admin@admin.com') {
-        $helmet = Helmet::findOrFail($id);
-        $helmet->delete();
-        return redirect()->route('helmets.index')->with('message', 'Helmet deleted successfully.');
+    {
+        $user = auth()->user();
+        if ($user && $user->email === 'admin@admin.com') {
+            $helmet = Helmet::findOrFail($id);
+            $helmet->delete();
+            return redirect()->route('helmets.index')->with('message', 'Helmet deleted successfully.');
+        }
+
+        return redirect()->back()->with('message', 'You do not have permission to delete this helmet.');
     }
-
-    return redirect()->back()->with('message', 'You do not have permission to delete this helmet.');
-}
-
 }
