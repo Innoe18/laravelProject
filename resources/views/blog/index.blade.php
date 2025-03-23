@@ -61,20 +61,41 @@
                         <a href="/blog/{{ $post->slug }}" class="bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 hover:from-pink-400 hover:via-purple-400 hover:to-blue-400 text-white font-bold py-2 px-4 rounded-full transition duration-300 shadow">
                             Keep Reading
                         </a>
-                        @if (isset(Auth::user()->id) && Auth::user()->id == $post->user->id)
-                            <div class="flex space-x-2 mt-2">
-                                <a href="/blog/{{ $post->slug }}/edit" class="bg-blue-400 hover:bg-blue-500 text-white text-sm font-medium py-1 px-3 rounded-full transition duration-300 shadow">
-                                    Edit
-                                </a>
-                                <form action="/blog/{{ $post->slug }}" method="POST">
+                        @auth
+                            @if(Auth::user()->id == $post->user->id)
+                                <!-- Edit & Delete Buttons for Post Owner -->
+                                <div class="flex space-x-2">
+                                    <a href="/blog/{{ $post->slug }}/edit" class="bg-blue-400 hover:bg-blue-500 text-white text-sm font-medium py-1 px-3 rounded-full transition duration-300 shadow">
+                                        Edit
+                                    </a>
+                                    <form action="/blog/{{ $post->slug }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="bg-red-400 hover:bg-red-500 text-white text-sm font-medium py-1 px-3 rounded-full transition duration-300 shadow">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            @else
+                                <!-- Like Button for Non-Owners -->
+                                @php
+                                    $userLiked = $post->likes->contains('user_id', Auth::id());
+                                @endphp
+                                <form action="{{ route('like.store') }}" method="POST" class="inline">
                                     @csrf
-                                    @method('delete')
-                                    <button type="submit" class="bg-red-400 hover:bg-red-500 text-white text-sm font-medium py-1 px-3 rounded-full transition duration-300 shadow">
-                                        Delete
+                                    <input type="hidden" name="likeable_id" value="{{ $post->id }}">
+                                    <input type="hidden" name="likeable_type" value="{{ get_class($post) }}">
+                                    <button type="submit" class="text-xl transition duration-300 flex items-center">
+                                        @if ($userLiked)
+                                            <i class="fas fa-heart text-red-400"></i>
+                                        @else
+                                            <i class="far fa-heart text-gray-500"></i>
+                                        @endif
+                                        <span class="ml-1">({{ $post->likes->count() }})</span>
                                     </button>
                                 </form>
-                            </div>
-                        @endif
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>
