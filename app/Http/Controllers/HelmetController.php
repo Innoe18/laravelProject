@@ -137,7 +137,16 @@ class HelmetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        // Implement as needed
+{
+    // Ensure the authenticated user is admin
+    $user = auth()->user();
+    if ($user && $user->email === 'admin@admin.com') {
+        $helmet = Helmet::findOrFail($id);
+        $helmet->delete();
+        return redirect()->route('helmets.index')->with('message', 'Helmet deleted successfully.');
     }
+
+    return redirect()->back()->with('message', 'You do not have permission to delete this helmet.');
+}
+s
 }

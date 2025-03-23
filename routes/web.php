@@ -41,3 +41,4 @@ Route::resource('/helmets', HelmetController::class);
 Route::post('/helmets/{id}/vote', [HelmetController::class, 'vote'])->name('helmets.vote');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::resource('/helmets', HelmetController::class);
