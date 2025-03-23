@@ -1,7 +1,8 @@
 ## Laravel 8 Complete Blog
 
 •	Author: Code With Innoe <br>
-
+## Link to youtube with demo of blog 
+[YouTube](https://youtu.be/sdVa_whryRo)
 ## Requirements
 •	PHP 7.3 or higher <br>
 •	Node 12.13.0 or higher <br>
