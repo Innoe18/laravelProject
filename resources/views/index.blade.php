@@ -5,12 +5,12 @@
     <div class="background-image grid grid-cols-1 m-auto">
         <div class="flex text-gray-100 pt-10">
             <div class="m-auto pt-4 pb-16 sm:m-auto w-4/5 block text-center">
-                <h1 class="sm:text-white text-5xl uppercase font-bold text-shadow-md pb-14">
+                <h1 class="sm:text-white text-6xl uppercase font-extrabold tracking-wider pb-14 text-pink-500">
                     Grid Goddesses !!!
                 </h1>
                 <a 
                     href="/blog"
-                    class="text-center bg-gray-50 text-gray-700 py-2 px-4 font-bold text-xl uppercase rounded-full shadow-md transition duration-300 hover:bg-gray-100">
+                    class="inline-block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white py-3 px-8 font-bold text-xl uppercase rounded-full shadow-lg transition duration-300">
                     Read More
                 </a>
             </div>

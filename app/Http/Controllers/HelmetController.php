@@ -148,5 +148,5 @@ class HelmetController extends Controller
 
     return redirect()->back()->with('message', 'You do not have permission to delete this helmet.');
 }
-s
+
 }
