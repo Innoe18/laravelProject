@@ -38,16 +38,19 @@
                         <p class="text-gray-600 text-sm mt-2">{{ $helmet->inspiration }}</p>
                         <div class="mt-4 text-center">
                             @if(auth()->check() && auth()->user()->email === 'admin@admin.com')
-                                <!-- Delete Button for Admin -->
-                                <form action="{{ route('helmets.destroy', $helmet->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-full transition duration-300">
-                                        Delete
-                                    </button>
-                                </form>
+                                <div class="flex space-x-2 justify-center">
+                                    <a href="{{ route('helmets.edit', $helmet->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded-full transition duration-300">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('helmets.destroy', $helmet->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-full transition duration-300">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
                             @else
-                                <!-- Vote Button for Regular Users -->
                                 <form action="{{ route('helmets.vote', $helmet->id) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="bg-pink-300 hover:bg-pink-400 text-white py-1 px-4 rounded-full transition duration-300">
